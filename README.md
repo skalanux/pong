@@ -4,6 +4,10 @@ Duelo de Pong **en 3D y a pantalla dividida** para la consola Toxinator.
 Cada jugador ve la cancha desde su propio lado, con el rival al fondo, y mueve
 su paleta **inclinando el celular**.
 
+[![CI](https://github.com/skalanux/pong/actions/workflows/ci.yml/badge.svg)](https://github.com/skalanux/pong/actions/workflows/ci.yml)
+
+![Pong 3D a pantalla dividida](docs/pong-3d.png)
+
 ## Controles
 
 - **Jugador 1:** celular en el **slot 0**. Mitad izquierda de la pantalla.
