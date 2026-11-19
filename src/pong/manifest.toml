@@ -1,0 +1,9 @@
+id = "pong"
+name = "Pong 3D"
+version = "0.2.0"
+requires_api = "0.1"
+description = "Duelo 3D a pantalla dividida: incliná el celular para mover tu paleta."
+locales = ["es"]
+default_locale = "es"
+players = [1, 2]
+modes = ["duelo", "vs cpu"]
