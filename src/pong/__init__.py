@@ -1,9 +1,12 @@
 from __future__ import annotations
 
-from toxinator.api import Game, GameManifest
+from typing import TYPE_CHECKING
 
-from .game import Pong
+if TYPE_CHECKING:
+    from toxinator.api import Game, GameManifest
 
 
 def create_game(manifest: GameManifest) -> Game:
+    from .game import Pong
+
     return Pong(manifest)
