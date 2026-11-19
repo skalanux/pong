@@ -53,16 +53,18 @@ botón de calibración de la PWA después de abrir la sesión.
 
 ## Instalar y ejecutar
 
-El symlink en el directorio de juegos externos ya está creado. Para reinstalarlo:
+Este repo vive en el directorio de juegos externos, así que la consola lo
+descubre directamente. Si lo clonás en otro lado:
 
 ```bash
 cd /home/ska/Projects/toxinator
-uv run toxinator install /home/ska/Projects/pong
+uv run toxinator install /ruta/a/pong
 ```
 
 Ejecutar:
 
 ```bash
+cd /home/ska/Projects/toxinator
 uv run toxinator play pong --https
 ```
 
@@ -108,7 +110,7 @@ pong/
 ## Tests y calidad
 
 ```bash
-cd /home/ska/Projects/pong
+cd /home/ska/Projects/toxinator-games/pong
 /home/ska/Projects/toxinator/.venv/bin/pytest -q
 /home/ska/Projects/toxinator/.venv/bin/ruff check src tests
 /home/ska/Projects/toxinator/.venv/bin/mypy src/pong
