@@ -1,7 +1,7 @@
 id = "pong"
 name = "Pong 3D"
 version = "0.2.0"
-requires_api = "0.2"
+requires_api = "0.3"
 description = "Duelo 3D a pantalla dividida: incliná el celular para mover tu paleta."
 locales = ["es"]
 default_locale = "es"
@@ -10,10 +10,15 @@ modes = ["duelo", "vs cpu"]
 
 [controller]
 layout = "motion"
-skin = "tokyo-moon"
+skin = "toxinator"
+orientation = "auto"
 action = "Sacar"
 back = "Volver"
-hint = "Incliná para mover tu paleta"
+hint = "Incliná para mover tu paleta · × para sacar"
+
+[controller.labels]
+cross = "Sacar"
+circle = "Volver"
 
 [art]
 motif = "pong"

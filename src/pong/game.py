@@ -153,7 +153,7 @@ class Pong:
 
         self._update_paddles(state, dt)
 
-        a_down = self._a_down(state)
+        a_down = self._action_down(state)
         a_edge = a_down and not self._a_held
         self._a_held = a_down
 
@@ -202,17 +202,22 @@ class Pong:
 
     # -- input --------------------------------------------------------------
 
-    def _a_down(self, state: Any) -> bool:
-        for slot in (0, 1):
-            frame = state.frame(slot)
-            if frame is not None and frame.button("A"):
-                return True
-        return False
+    def _frame_for(self, state: Any, player: int) -> Any | None:
+        if player == 0:
+            frame = state.frame(0)
+            return frame if frame is not None else state.primary_frame()
+        return state.frame(1)
+
+    def _action_down(self, state: Any) -> bool:
+        frames = (state.frame(0), state.frame(1), state.primary_frame())
+        return any(
+            frame is not None and frame.button("cross") for frame in frames
+        )
 
     def _update_paddles(self, state: Any, dt: float) -> None:
         for player in (0, 1):
             side = -1 if player == 0 else 1
-            frame = state.frame(player)
+            frame = self._frame_for(state, player)
             if frame is None:
                 self._sensor_seen[player] = False
                 self._touch_seen[player] = False
@@ -788,9 +793,9 @@ class Pong:
             self._hud[f"status{player}"].setText(f"P{player + 1} · {status}")
 
             if match.state == "game_over":
-                prompt = "A / NUEVA PARTIDA"
+                prompt = "X / NUEVA PARTIDA"
             elif match.state == "serve":
-                prompt = f"SAQUE EN {match.timer:.1f}s  ·  A / SACAR"
+                prompt = f"SAQUE EN {match.timer:.1f}s  ·  X / SACAR"
             self._hud[f"prompt{player}"].setText(prompt)
 
             if match.state == "game_over" and match.winner is not None:

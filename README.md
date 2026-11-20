@@ -13,18 +13,21 @@ su paleta **inclinando el celular**.
 - **Jugador 1:** celular en el **slot 0**. Mitad izquierda de la pantalla.
 - **Jugador 2:** celular en el **slot 1**. Mitad derecha de la pantalla.
 - **Incliná el celular a izquierda/derecha** para mover tu paleta en tu vista.
-- **A:** saca antes de que termine la cuenta y arranca una nueva partida al
-  final.
-- **B:** reservado por la plataforma para volver.
+- **×:** saca antes de que termine la cuenta y arranca una nueva partida al
+  final. En teclado, **Enter** o **J**.
+- **○:** reservado por la plataforma para volver.
 - Gana el primero en llegar a **7**.
 
 Antes de jugar:
 
-1. Abrí la PWA del celular y tocá **Activar sensores**.
-2. Tocá **Calibrar** con el celular en la pose neutra (vertical y cómoda).
+1. Abrí la PWA del celular; los sensores arrancan solos (si iOS pide permiso,
+   el primer toque lo concede).
+2. Tocá **Calibrar** (ajustes ⋯) con el celular en la pose neutra (vertical y
+   cómoda).
 3. Movete a izquierda/derecha inclinando el celular.
 
-La orientación que llega al juego es relativa a esa pose neutra.
+La orientación que llega al juego es relativa a esa pose neutra. Sin celular,
+el teclado/mouse funciona como P1: el mouse mueve la paleta y Enter/J saca.
 
 ## Mando y arte
 
@@ -33,15 +36,19 @@ El manifest declara el perfil del mando y el prop del launcher:
 ```toml
 [controller]
 layout = "motion"
-skin = "tokyo-moon"
-action = "Sacar"
-hint = "Incliná para mover tu paleta"
+skin = "toxinator"
+orientation = "auto"
+hint = "Incliná para mover tu paleta · × para sacar"
+
+[controller.labels]
+cross = "Sacar"
+circle = "Volver"
 
 [art]
 motif = "pong"
 ```
 
-El celular abre el layout de movimiento con la skin **Tokyo Moon**, y el diorama
+El celular abre el layout de movimiento con la skin **Toxinator**, y el diorama
 de Pong en el launcher usa el prop de paletas y pelota.
 
 ## Vibración y sonido
