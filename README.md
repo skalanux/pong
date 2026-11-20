@@ -26,6 +26,45 @@ Antes de jugar:
 
 La orientación que llega al juego es relativa a esa pose neutra.
 
+## Mando y arte
+
+El manifest declara el perfil del mando y el prop del launcher:
+
+```toml
+[controller]
+layout = "motion"
+skin = "tokyo-moon"
+action = "Sacar"
+hint = "Incliná para mover tu paleta"
+
+[art]
+motif = "pong"
+```
+
+El celular abre el layout de movimiento con la skin **Tokyo Moon**, y el diorama
+de Pong en el launcher usa el prop de paletas y pelota.
+
+## Vibración y sonido
+
+Pong usa el feedback del celular:
+
+- **Golpe de paleta:** vibración corta + tick de audio.
+- **Punto:** vibración + tono grave.
+- **Victoria:** patrón de vibración más largo.
+
+Al entrar al juego, tocá una vez el aviso **ACTIVAR SONIDO Y VIBRACIÓN**.
+Ese toque desbloquea el audio y la vibración en el navegador, y prueba ambos.
+Si el aviso no aparece o no hay vibración, mirá el terminal de la consola:
+los mensajes `phone haptic` y `phone audio` confirman que el juego los está
+mandando.
+
+La vibración funciona en Android con **Chrome o Samsung Internet**. **Firefox
+Android tiene la Vibration API deshabilitada**, así que puede decir “audio
+activado” y no vibrar; en ese caso abrí el QR en Chrome. iPhone/Safari tampoco
+expone vibración web. El tono usa Web Audio y necesita que el celular haya
+tenido una interacción. Si no hay celular, no pasa nada. Revisá también que el
+teléfono no esté en silencio o con la vibración desactivada.
+
 ## Los sensores necesitan HTTPS
 
 El modo HTTP por defecto de Toxinator **no entrega movimiento**. Si corrés el
@@ -38,8 +77,15 @@ cd /home/ska/Projects/toxinator
 uv run toxinator play pong --https
 ```
 
-La primera vez hay que aceptar el certificado autofirmado en el celular. Si usás
-un certificado propio:
+Si no querés tocar la CA del teléfono, usá el túnel HTTPS de Cloudflare:
+
+```bash
+uv run toxinator play pong --cloudflare
+```
+
+La primera vez hay que aceptar el certificado autofirmado en el celular. Con
+`--cloudflare` no hay que aceptar nada: Cloudflare entrega un certificado
+válido. Si usás un certificado propio:
 
 ```bash
 uv run toxinator play pong --https --cert mi-cert.pem --key mi-clave.pem

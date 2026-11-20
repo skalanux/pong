@@ -551,6 +551,9 @@ class Pong:
     def _on_event(self, event: PongEvent) -> None:
         if event.kind == "paddle" and event.player is not None:
             self._paddle_flash[event.player] = 0.22
+            if self.ctx is not None:
+                self.ctx.phone.vibrate([50], slot=event.player)
+                self.ctx.phone.tone(660, 35, volume=0.16, slot=event.player)
         elif event.kind == "score" and event.player is not None:
             self._score_flash[event.player] = 0.55
             self._paddle_flash[event.player] = 0.28
@@ -558,10 +561,18 @@ class Pong:
             self._message = f"PUNTO P{event.player + 1}"
             self._message_timer = 1.35
             self._message_color = self.PLAYER_COLORS[event.player]
+            if self.ctx is not None:
+                self.ctx.phone.vibrate([80, 50, 120], slot=event.player)
+                self.ctx.phone.tone(180, 150, volume=0.30, slot=event.player)
         elif event.kind == "win" and event.player is not None:
             self._message = f"GANA P{event.player + 1}"
             self._message_timer = 0.0
             self._message_color = GOLD
+            if self.ctx is not None:
+                self.ctx.phone.vibrate(
+                    [200, 80, 300, 80, 450],
+                    slot=event.player,
+                )
 
     def _update_effects(self, dt: float) -> None:
         for index in (0, 1):
